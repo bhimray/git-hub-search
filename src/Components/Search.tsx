@@ -1,25 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useSearchQuery } from "./Query";
+import React, { useEffect, useState, useRef } from "react";
 import { TextField } from "@mui/material";
-import { Select } from "@mui/material";
+import Filter from "./Filter";
 
-type Props = {};
+type Props = {
+  searchDescription: string;
+  setSearchDescription: (param: string) => void;
+  variable: string;
+  setVariable: (param: string) => void;
+  order: string;
+  setOrder: (param: string) => void;
+  refetch: any;
+};
 
-const Search = (props: Props) => {
-  const [searchDescription, setSearchDescription] = useState<string>("");
-  //   const [search, setSearch] = useState<string>("");
+const Search = ({
+  searchDescription,
+  setSearchDescription,
+  variable,
+  setVariable,
+  order,
+  setOrder,
+  refetch,
+}: Props) => {
+  const timeRef = useRef<null | ReturnType<typeof setTimeout>>();
+
   console.log(searchDescription);
 
-  const { data, loading, error, refetch } = useSearchQuery({
-    searchDescription: searchDescription,
-  });
-
   useEffect(() => {
-    if (data) console.log(data);
-  }, [data]);
-
-  if (loading) return <div> Loading...</div>;
-  if (error) return <div>Error occured</div>;
+    console.log(variable, order, "this is variable and order");
+    if (variable || order) {
+      clearTimeout(Number(timeRef));
+      timeRef.current = setTimeout(() => {
+        console.log("refetching", variable, order);
+        refetch();
+      }, 2000);
+    }
+  }, [variable, order, refetch]);
 
   let timeout: any;
   const handleSearchChange = (
@@ -34,6 +49,7 @@ const Search = (props: Props) => {
   };
   return (
     <div>
+      {/* <Skeleton variant="rectangular" width={210} height={118} /> */}
       <TextField
         id="outlined-basic"
         value={searchDescription}
@@ -41,6 +57,12 @@ const Search = (props: Props) => {
         variant="outlined"
         required
         onChange={(e) => handleSearchChange(e)}
+      />
+      <Filter
+        setVariable={setVariable}
+        setOrder={setOrder}
+        order={order}
+        variable={variable}
       />
     </div>
   );
