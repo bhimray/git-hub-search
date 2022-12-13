@@ -10,6 +10,7 @@ import { useReadme } from "./Readme";
 type Props = {};
 
 const Details = (props: Props) => {
+  const [readme, setReadme] = useState();
   const [detail, setDetail] = useState<any>();
   const { name, reponame } = useParams();
   let newName: string;
@@ -36,35 +37,40 @@ const Details = (props: Props) => {
       keepPreviousData: true,
     }
   );
-  //   const { readme } = useReadme({
-  const owner: string = detail?.owner.login;
-  const repo: string = detail?.name;
-  const path: string = "README.md";
-  //   });
-  let readmeData;
-  async function readme(owner: string, repo: string, path: string) {
-    await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/contents/${path}`
-    )
-      .then((d) => d.json())
-      .then((d) =>
-        fetch(
-          `https://api.github.com/repos/${owner}/${repo}/git/blobs/${d.sha}`
-        )
-      )
-      .then((d) => d.json())
-      .then((d) => {
-        readmeData = JSON.parse(window.atob(d.content));
-      });
-  }
 
-  console.log(readme);
+  //   let readmeData;
+  //   let owner: any;
+  //   async function readmeFn() {
+  //     const repo: string = data.name;
+  //     const path: string = "README.md";
+  //     console.log(detail, owner, "inside funciton");
+  //     await fetch(
+  //       `https://api.github.com/repos/${owner}/${repo}/contents/${path}`
+  //     )
+  //       .then((d) => d.json())
+  //       .then((d) =>
+  //         fetch(
+  //           `https://api.github.com/repos/${owner}/${repo}/git/blobs/${d.sha}`
+  //         )
+  //       )
+  //       .then((d) => d.json())
+  //       .then((d) => {
+  //         setReadme(JSON.parse(window.atob(d.content)));
+  //       });
+  //   }
+
+  //   console.log(readmeData, "readme dataaaaaaaaaaaaaaaaaaaaaaaa");
   useEffect(() => {
+    console.log(
+      "useeffect data############################################",
+      data
+    );
     if (data) {
+      //   owner = data.owner.login;
       setDetail(data);
-      readme(owner, repo, path);
+      //   readmeFn();
     }
-  }, [data, detail]);
+  }, [data]);
 
   console.log("detailss", detail);
   if (detail) {
@@ -76,7 +82,7 @@ const Details = (props: Props) => {
           <Typography variant="h6">{detail.name}</Typography>
           <Typography variant="h2">{detail.open_issues_count}</Typography>
           <Typography variant="h2">{detail.default_branch}</Typography>
-          <Typography variant="h2">{readmeData}</Typography>
+          {/* <Typography variant="h2">{readme ? readme : null}</Typography> */}
         </Box>
       </div>
     );
