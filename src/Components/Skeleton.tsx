@@ -2,9 +2,20 @@ import React from "react";
 import { Stack, Skeleton } from "@mui/material";
 type Props = {};
 
+const styleSkeleton = {
+  display: "flex",
+  padding: "5rem",
+  justifyContent: "center",
+  alignItems: "center",
+};
+const width = 800;
+const height = 150;
+const profileWidth = 300;
+const profileHeight = 20;
+
 const ListSkeleton = (props: Props) => {
   return (
-    <div>
+    <div style={styleSkeleton}>
       <Stack spacing={1}>
         {/* For variant="text", adjust the height via font-size */}
         <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
@@ -13,50 +24,44 @@ const ListSkeleton = (props: Props) => {
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={40}
-          height={40}
+          width={profileWidth}
+          height={profileHeight}
         />
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={210}
-          height={60}
+          width={width}
+          height={height}
         />
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={40}
-          height={40}
+          width={profileWidth}
+          height={profileHeight}
         />
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={210}
-          height={60}
+          width={width}
+          height={height}
         />
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={40}
-          height={40}
+          width={profileWidth}
+          height={profileHeight}
         />
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={210}
-          height={60}
+          width={width}
+          height={height}
         />
         <Skeleton
           animation="wave"
           variant="rectangular"
-          width={40}
-          height={40}
-        />
-        <Skeleton
-          animation="wave"
-          variant="rectangular"
-          width={210}
-          height={60}
+          width={profileWidth}
+          height={profileHeight}
         />
       </Stack>
     </div>

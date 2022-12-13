@@ -48,7 +48,9 @@ export default function Filter({
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>Sort By</Button>
+      <Button onClick={handleClickOpen} variant="contained">
+        Sort By
+      </Button>
       <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
         <DialogTitle>Please Select:</DialogTitle>
         <DialogContent>
@@ -87,8 +89,12 @@ export default function Filter({
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Ok</Button>
+          <Button onClick={handleClose} variant="outlined">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} variant="contained">
+            Ok
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

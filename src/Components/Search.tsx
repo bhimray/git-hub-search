@@ -43,12 +43,18 @@ const Search = ({
     setSearchDescription(e.target.value);
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      //   setSearch(searchDescription);
+      console.log("refetching the data");
       refetch();
     }, 2000);
   };
+  const styleSearch = {
+    marginTop: "2rem",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  };
   return (
-    <div>
+    <div style={styleSearch}>
       {/* <Skeleton variant="rectangular" width={210} height={118} /> */}
       <TextField
         id="outlined-basic"
