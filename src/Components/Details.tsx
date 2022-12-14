@@ -72,7 +72,7 @@ const Details = (props: Props) => {
     }
   }, [data]);
 
-  console.log("detailss", detail);
+  console.log("details", detail);
   if (detail) {
     console.log("detail =============");
     return (

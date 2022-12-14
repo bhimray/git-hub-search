@@ -32,7 +32,7 @@ export const useSearchQuery = ({
     async () => {
       return await axios
         .get(
-          `https://api.github.com/search/repositories?q=${searchDescription}&page=${pageNumber}&sort=${variable}&order=${order}&per_page=${perPageItem}&since=${since}`
+          `https://api.github.com/search/repositories?q=${searchDescription}&page=${pageNumber}&per_page=${perPageItem}&sort=${variable}&order=${order}&since=${since}`
         )
         .then(function (response) {
           console.log(response.data, response, pageNumber, "axios data");
