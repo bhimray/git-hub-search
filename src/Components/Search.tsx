@@ -36,16 +36,18 @@ const Search = ({
     }
   }, [variable, order, refetch]);
 
-  let timeout: any;
   const handleSearchChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
+    e.preventDefault();
     setSearchDescription(e.target.value);
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      console.log("refetching the data");
+  };
+  const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // e.preventDefault();
+    console.log(searchDescription.length, e.key);
+    if (searchDescription.length >= 1 && e.key === "Enter") {
       refetch();
-    }, 2000);
+    }
   };
   const styleSearch = {
     marginTop: "2rem",
@@ -62,9 +64,11 @@ const Search = ({
         label="Search repositories"
         variant="outlined"
         required
+        onKeyDown={(e) => handleEnter(e)}
         onChange={(e) => handleSearchChange(e)}
       />
       <Filter
+        searchDescription={searchDescription}
         setVariable={setVariable}
         setOrder={setOrder}
         order={order}

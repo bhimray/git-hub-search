@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 type Props = {
   data: any;
+  searchDescription: string;
 };
 const styleNoResult = {
   width: "-webkit - fill - available",
@@ -32,7 +33,10 @@ const styleResult = {
   overflow: "scroll",
 };
 
-const RepoList = ({ data }: Props) => {
+const RepoList = ({ data, searchDescription }: Props) => {
+  if (searchDescription.length === 0) {
+    data = null;
+  }
   return (
     <>
       {data ? (

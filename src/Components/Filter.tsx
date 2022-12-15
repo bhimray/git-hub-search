@@ -16,12 +16,14 @@ type Props = {
   setOrder: (param: string) => void;
   order: string;
   variable: string;
+  searchDescription: string;
 };
 export default function Filter({
   setVariable,
   setOrder,
   order,
   variable,
+  searchDescription,
 }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -45,10 +47,14 @@ export default function Filter({
       setOpen(false);
     }
   };
-
+  console.log(searchDescription.length, "searchDescription");
   return (
     <div>
-      <Button onClick={handleClickOpen} variant="contained">
+      <Button
+        onClick={handleClickOpen}
+        variant="contained"
+        disabled={searchDescription.length === 0 ? true : false}
+      >
         Sort By
       </Button>
       <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>

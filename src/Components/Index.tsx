@@ -45,7 +45,11 @@ const Index = (props: Props) => {
     console.log("useEffect is triggerred to fetch data");
     if (fetchedData) {
       console.log(fetchedData, "this is fetched data from refetched");
-      setData(fetchedData);
+      if (searchDescription.length === 0) {
+        setData(null);
+      } else {
+        setData(fetchedData);
+      }
     }
   }, [fetchedData]);
 
@@ -107,7 +111,11 @@ const Index = (props: Props) => {
         setOrder={setOrder}
         refetch={refetch}
       />
-      {loading ? <ListSkeleton /> : <RepoList data={data} />}
+      {loading ? (
+        <ListSkeleton />
+      ) : (
+        <RepoList data={data} searchDescription={searchDescription} />
+      )}
       <ButtonGroup>
         <Button
           variant="outlined"
