@@ -24,7 +24,9 @@ const Details = (props: Props) => {
     "details-query",
     async () => {
       return await axios
-        .get(`https://api.github.com/repos/${newName}/${newRepo}`)
+        .get(
+          `http:localhost:8000/get-details?newName=${newName}&newRepo=${newRepo}`
+        )
         .then(function (response) {
           console.log(response.data, response, "axios data");
           return response.data;

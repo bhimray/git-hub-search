@@ -31,9 +31,7 @@ export const useSearchQuery = ({
     "github-query",
     async () => {
       return await axios
-        .get(
-          `https://api.github.com/search/repositories?q=${searchDescription}&page=${pageNumber}&per_page=${perPageItem}&sort=${variable}&order=${order}&since=${since}`
-        )
+        .get("http://localhost:8000/")
         .then(function (response) {
           console.log(response.data, response, pageNumber, "axios data");
           return response.data;
