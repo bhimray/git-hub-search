@@ -1,5 +1,5 @@
-import React from "react";
-
+import axios, { AxiosResponse } from "axios";
+import { useState } from "react";
 type Props = {
   owner: string;
   repo: string;
@@ -7,15 +7,17 @@ type Props = {
 };
 
 export const useReadme = async ({ owner, repo, path }: Props) => {
-  let readme: any = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/contents/${path}`
-  )
-    .then((d) => d.json())
-    .then((d) =>
-      fetch(`https://api.github.com/repos/${owner}/${repo}/git/blobs/${d.sha}`)
-    )
-    .then((d) => d.json())
-    .then((d) => JSON.parse(window.atob(d.content)));
+  const [readmeFile, getReadmeFile] = useState<AxiosResponse | null>(null);
 
-  return readme;
+  await axios
+    .get(`http://localhost:8000/${owner}/${repo}/${path}`)
+    .then((res) => {
+      getReadmeFile(res);
+      console.log(res, "res of readme");
+      // console.log(typeof res, window.atob(res), "this is readme res");
+      // return window.atob(res);
+    });
+  console.log(readmeFile);
+
+  return readmeFile;
 };
